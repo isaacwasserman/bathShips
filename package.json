@@ -1,0 +1,19 @@
+{
+  "name": "bathShips",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "ag_dubs",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zeekw/bathShips.git"
+  },
+  "dependencies": {
+    "connect": "3.5.x",
+    "serve-static": "1.11.x"
+  }
+}
