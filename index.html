@@ -14,7 +14,6 @@
         <a-asset-item id="legs-ply" src="legs.bake.ply"></a-asset-item>
       </a-assets>
       <a-camera position="1.2 .4 -.35" rotation="0 90 0" zoom="1.8" user-height="0" raycaster crawling-cursor="target: #my-cursor">
-<!--        <a-cursor id="my-cursor"></a-cursor>-->
       </a-camera>
       <a-light type="ambient" intensity="0.9"></a-light>
       <a-light position="0.9 1.1 -0.4" rotation="0 -20 20" color="#ffb" intensity=".6"></a-light>
@@ -23,7 +22,7 @@
       <a-entity id="legs" ply-model="src: #legs-ply" scale=".01 .01 .01" position="0.56 0.07 -0.35" rotation="-90 0 90"></a-entity>
       <a-ocean id="water" scale="1.42 0.68 1" material="color: #3694DF;opacity:0.7" position=".75 .3 -0.35" rotation="90 0 0" density="20" speed="0.5" ocean="width: 1; depth: 1; density: 5; amplitude: 0.005; amplitudeVariance: 0.001" scale="1 1 1" position="0 -1 0"></a-ocean>
       <a-entity position="0.75 0.33 -.37">
-        <a-entity geometry="mergeTo:null;depth:0.1;height:0.1;width:0.3" material="opacity:0;" alongpath="path: -0.15,0,0.135 0,0,0.2 0.15,0,0.135 0.2,0,0 0.15,0,-0.135 0,0,-0.2 -0.15,0,-0.135 -0.2,0,0; dur: 30000; loop:true; closed:true">
+        <a-entity alongpath="path: -0.15,0,0.135 0,0,0.2 0.15,0,0.135 0.2,0,0 0.15,0,-0.135 0,0,-0.2 -0.15,0,-0.135 -0.2,0,0; dur: 30000; loop:true; closed:true" geometry="mergeTo:null;depth:0.1;height:0.1;width:0.3" material="opacity:0;" >
           <a-collada-model id="battleship" src="#battleship-dae" position="0 0 0" scale="2.2 2.2 2.2">
             <a-animation attribute="position"
               dur="2000"
@@ -43,9 +42,11 @@
               easing="linear"
             ></a-animation>
             <a-camera active="false" id="camera" near="0.001" user-height="0.005" rotation="0 -90 0" position="0.08 0 0"></a-camera>
+            <a-entity id="plume" scale="0.003 0.003 0.003" position="0.033 0.01 0"></a-entity>
           </a-collada-model>
         </a-entity>
       </a-entity>
+      <script src="smoke.js"></script>
     </a-scene>
   </body>
 </html>

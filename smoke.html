@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-sky color="purple"></a-sky>
+      <a-camera position="0 5 10" user-height="0"></a-camera>
+      <a-entity id="plume" scale="0.5 0.5 0.5">
+<!--
+        <a-sphere class="puff" color="black" material="transparent:true;opacity:0.5;">
+          <a-animation attribute="position"
+            from="0 0 0"
+            to="0 10 0"
+            dur="5000"
+            easing="linear"
+          ></a-animation>
+          <a-animation attribute="material.opacity"
+            from="0.5"
+            to="0"
+            dur="5000"
+            easing="ease-in"
+          ></a-animation>
+        </a-sphere>
+-->
+      </a-box>
+    </a-scene>
+    <script src="smoke.js"></script>
+  </body>
+</html>
