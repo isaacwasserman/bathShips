@@ -13,8 +13,17 @@
         <a-asset-item id="battleship-dae" src="battleship-new-anchor.dae" preload="auto"></a-asset-item>
         <a-asset-item id="legs-ply" src="legs.bake.ply"></a-asset-item>
       </a-assets>
-      <a-camera position="1.2 .4 -.35" rotation="0 90 0" zoom="1.8" user-height="0" raycaster crawling-cursor="target: #my-cursor">
+      <a-camera id="main-cam" active="true" position="1.2 .4 -.35" rotation="0 90 0" zoom="1.8" user-height="0">
+<!--
+        <a-cursor class="main-cursor" position="0 0 -0.2" scale="0.2 0.2 0.2" fuse="true" color="white" raycaster="objects: .clickable">
+          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+               fill="backwards" from="0.2 0.2 0.2" to="0.1 0.1 0.1"></a-animation>
+          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+               fill="forwards" from="0.2 0.2 0.2" to="0.1 0.1 0.1"></a-animation>
+        </a-cursor>
+-->
       </a-camera>
+<!--      <a-box class="ship-button clickable" scale="0.07 0.03 0.03" position="0.9 0.5 -0.15" rotation="0 -90 0" color="magenta" onclick="cam('ship');"></a-box>-->
       <a-light type="ambient" intensity="0.9"></a-light>
       <a-light position="0.9 1.1 -0.4" rotation="0 -20 20" color="#ffb" intensity=".6"></a-light>
       <a-sky id="sky" color="#992299"></a-sky>
@@ -22,8 +31,8 @@
       <a-entity id="legs" ply-model="src: #legs-ply" scale=".01 .01 .01" position="0.56 0.07 -0.35" rotation="-90 0 90"></a-entity>
       <a-ocean id="water" scale="1.42 0.68 1" material="color: #3694DF;opacity:0.7" position=".75 .3 -0.35" rotation="90 0 0" density="20" speed="0.5" ocean="width: 1; depth: 1; density: 5; amplitude: 0.005; amplitudeVariance: 0.001" scale="1 1 1" position="0 -1 0"></a-ocean>
       <a-entity position="0.75 0.33 -.37">
-        <a-entity alongpath="path: -0.15,0,0.135 0,0,0.2 0.15,0,0.135 0.2,0,0 0.15,0,-0.135 0,0,-0.2 -0.15,0,-0.135 -0.2,0,0; dur: 30000; loop:true; closed:true" geometry="mergeTo:null;depth:0.1;height:0.1;width:0.3" material="opacity:0;" >
-          <a-collada-model id="battleship" src="#battleship-dae" position="0 0 0" scale="2.2 2.2 2.2">
+        <a-entity alongpath="path: -0.15,0,0.135 0,0,0.2 0.15,0,0.135 0.2,0,0 0.15,0,-0.135 0,0,-0.2 -0.15,0,-0.135 -0.2,0,0; dur: 30000; loop:true; closed:true; delay:2000" geometry="mergeTo:null;depth:0.1;height:0.1;width:0.3" material="opacity:0;" >
+          <a-collada-model id="battleship" src="#battleship-dae" position="0 0 0" scale="2.2 2.2 2.2" onclick="cam('main');">
             <a-animation attribute="position"
               dur="2000"
               fill="forwards"
@@ -34,6 +43,7 @@
               direction="alternate"
             ></a-animation>
             <a-animation attribute="rotation"
+              delay="2000"
               dur="30000"
               fill="forwards"
               repeat="indefinite"
@@ -41,12 +51,46 @@
               to="0 360 0"
               easing="linear"
             ></a-animation>
-            <a-camera active="false" id="camera" near="0.001" user-height="0.005" rotation="0 -90 0" position="0.08 0 0"></a-camera>
+<!--            <a-box class="main-button clickable" scale="0.007 0.003 0.003" position="0.1 0.01 -0.01" rotation="0 -90 0" color="magenta" onclick="cam();" visible="false"></a-box>-->
+            <a-camera id="ship-cam" active="false" near="0.001" user-height="0.005" rotation="0 -90 0" position="0.08 0 0">
+<!--
+              <a-cursor class="ship-cursor" position="0 0 -0.02" scale="0.04 0.04 0.04" fuse="true" color="white">
+                <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+               fill="backwards" from="0.04 0.04 0.04" to="0.02 0.02 0.02"></a-animation>
+                <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+               fill="forwards" from="0.04 0.04 0.04" to="0.02 0.02 0.02"></a-animation>
+              </a-cursor>
+-->
+            </a-camera>
             <a-entity id="plume" scale="0.003 0.003 0.003" position="0.033 0.01 0"></a-entity>
           </a-collada-model>
         </a-entity>
       </a-entity>
       <script src="smoke.js"></script>
+      <script>
+        $('a-camera a-cursor').attr("position","0 0 -0.2");
+        $('#ship-cam a-cursor').attr("position","0 0 -0.02");
+
+        var cam = function(whichCam){
+          if(whichCam == 'ship'){
+            $('.ship-button').attr('visible','false');
+            $('.main-cursor').attr('visible','false');
+            $('.main-button').attr('visible','true');
+            $('.ship-cursor').attr('visible','true');
+            $('#main-cam').attr('active','false');
+            $('#ship-cam').attr('active','true');
+            
+          }
+          if(whichCam == 'main'){
+            $('.main-button').attr('visible','false');
+            $('.ship-cursor').attr('visible','false');
+            $('.ship-button').attr('visible','true');
+            $('.main-cursor').attr('visible','true');
+            $('#ship-cam').attr('active','false');
+            $('#main-cam').attr('active','true');
+          }
+        }
+      </script>
     </a-scene>
   </body>
 </html>
